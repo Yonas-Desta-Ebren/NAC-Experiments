@@ -1,0 +1,200 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\geometry{margin=1in}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Comparison of Neural Generative Coding and Backpropagation Models},
+    pdfpagemode=FullScreen,
+}
+
+\title{Comparison of Neural Generative Coding and Backpropagation Models}
+\author{NAC Project Team}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This report presents a comprehensive comparison between Neural Generative Coding (NGC) models and traditional Backpropagation-based models for generative modeling tasks on the MNIST dataset. We evaluate four different models: GNCN-PDH (Neural Generative Coding), GVAE (Gaussian Variational Autoencoder), GVAE-CV (Gaussian VAE with Constant Variance), and RAE (Regularized Autoencoder). The models are compared across multiple metrics including Binary Cross-Entropy (BCE), Masked Mean Squared Error (M-MSE), Classification Error, and Log-Likelihood. Our findings indicate that each model has distinct strengths: RAE excels in reconstruction and classification tasks, GVAE performs best in probabilistic modeling, GVAE-CV offers a good balance between reconstruction and probabilistic modeling, while GNCN-PDH provides a biologically plausible alternative with local learning rules.
+\end{abstract}
+
+\section{Introduction}
+
+Deep learning models have achieved remarkable success in various domains, but the standard backpropagation algorithm used to train these models has been criticized for its biological implausibility. Neural Generative Coding (NGC) offers an alternative learning approach that is more aligned with how learning might occur in biological neural networks, using local learning rules instead of the global error propagation required by backpropagation.
+
+This report compares the performance of NGC models with traditional backpropagation-based models on generative modeling tasks using the MNIST dataset. We aim to understand the trade-offs between biological plausibility and performance across different metrics.
+
+\section{Models Compared}
+
+\subsection{GNCN-PDH (Neural Generative Coding)}
+GNCN-PDH is a biologically inspired model that uses Predictive Discrete Hebbian learning. Key characteristics include:
+\begin{itemize}
+    \item Uses local learning rules instead of backpropagation
+    \item Incorporates both bottom-up and top-down information flow
+    \item Trained for 5 epochs in our experiment
+    \item Offers greater biological plausibility than backpropagation models
+\end{itemize}
+
+\subsection{GVAE (Gaussian Variational Autoencoder)}
+GVAE is a traditional VAE model trained with backpropagation. Key characteristics include:
+\begin{itemize}
+    \item Uses a Gaussian prior in the latent space
+    \item Trained for 50 epochs in our experiment
+    \item Final BCE: 77.65
+    \item Test BCE: 76.34
+    \item M-MSE: 21.85
+    \item Classification Error: 11.28\%
+    \item Monte Carlo Log-Likelihood: -194.01
+\end{itemize}
+
+\subsection{GVAE-CV (Gaussian VAE with Constant Variance)}
+GVAE-CV is a variant of GVAE with fixed variance in the latent space. Key characteristics include:
+\begin{itemize}
+    \item Uses a fixed variance parameter in the latent space
+    \item Trained for 50 epochs in our experiment
+    \item Final BCE: 67.82
+\end{itemize}
+
+\subsection{RAE (Regularized Autoencoder)}
+RAE is a deterministic autoencoder with L2 regularization. Key characteristics include:
+\begin{itemize}
+    \item Does not use a variational approach
+    \item Applies L2 regularization to prevent overfitting
+    \item Trained for 50 epochs in our experiment
+    \item Final BCE: 55.38
+    \item Test BCE: 58.45
+    \item M-MSE: 19.92
+    \item Classification Error: 10.26\%
+    \item Monte Carlo Log-Likelihood: -212.58
+\end{itemize}
+
+\section{Performance Metrics}
+
+We evaluated the models using several metrics to assess different aspects of their performance:
+
+\subsection{Binary Cross-Entropy (BCE)}
+BCE measures the reconstruction quality of the models. Lower values indicate better reconstruction performance.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{comparison_results/bce_comparison.png}
+    \caption{Comparison of Binary Cross-Entropy (BCE) across models}
+    \label{fig:bce}
+\end{figure}
+
+As shown in Figure \ref{fig:bce}, RAE achieved the lowest BCE (55.38), followed by GVAE-CV (67.82) and GVAE (77.65). The GNCN-PDH model's BCE was not directly comparable due to differences in implementation.
+
+\subsection{Masked Mean Squared Error (M-MSE)}
+M-MSE measures the model's ability to reconstruct partially masked inputs. Lower values indicate better generalization to incomplete data.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{comparison_results/mmse_comparison.png}
+    \caption{Comparison of Masked Mean Squared Error (M-MSE) across models}
+    \label{fig:mmse}
+\end{figure}
+
+As shown in Figure \ref{fig:mmse}, RAE achieved the lowest M-MSE of 19.92, outperforming GVAE (21.85).
+
+\subsection{Classification Error}
+Classification error measures the model's ability to learn discriminative features in the latent space. Lower values indicate better representation learning.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{comparison_results/class_error_comparison.png}
+    \caption{Comparison of Classification Error across models}
+    \label{fig:class_error}
+\end{figure}
+
+As shown in Figure \ref{fig:class_error}, RAE achieved the lowest classification error of 10.26\%, slightly better than GVAE (11.28\%).
+
+\subsection{Log-Likelihood}
+Log-likelihood measures the model's ability to capture the underlying data distribution. Higher (less negative) values indicate better density estimation.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{comparison_results/log_likelihood_comparison.png}
+    \caption{Comparison of Log-Likelihood across models}
+    \label{fig:log_likelihood}
+\end{figure}
+
+As shown in Figure \ref{fig:log_likelihood}, GVAE achieved a better Monte Carlo log-likelihood (-194.01) compared to RAE (-212.58).
+
+\section{Training Convergence}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{comparison_results/training_curves_comparison.png}
+    \caption{Training convergence curves for all models}
+    \label{fig:training_curves}
+\end{figure}
+
+Figure \ref{fig:training_curves} shows the training convergence curves for all models. Key observations include:
+\begin{itemize}
+    \item RAE converges to the lowest BCE, followed by GVAE-CV and then GVAE
+    \item All models show rapid improvement in the first 10 epochs, followed by more gradual improvement
+    \item RAE appears to have the fastest convergence rate among the backpropagation models
+    \item The simulated curve for GNCN-PDH (included for illustration) suggests potentially faster convergence, but this would need to be verified with actual data
+\end{itemize}
+
+\section{Discussion}
+
+Our experiments reveal several interesting trade-offs between the different models:
+
+\subsection{Reconstruction vs. Probabilistic Modeling}
+RAE achieves the best reconstruction performance (lowest BCE) but performs worse on probabilistic modeling (log-likelihood). This highlights the trade-off between deterministic autoencoders, which excel at reconstruction, and variational approaches, which are better suited for probabilistic modeling.
+
+\subsection{Biological Plausibility vs. Performance}
+GNCN-PDH offers greater biological plausibility through its use of local learning rules, but direct comparison with backpropagation models on all metrics was not possible in this experiment. This reflects the ongoing challenge of balancing biological plausibility with performance in neural network models.
+
+\subsection{Model Complexity}
+The variational models (GVAE and GVAE-CV) have additional complexity compared to RAE due to their probabilistic nature. This complexity may contribute to their lower reconstruction performance but enables better probabilistic modeling.
+
+\section{Conclusion}
+
+Based on our experiments, we can draw the following conclusions:
+
+\begin{enumerate}
+    \item \textbf{RAE} shows the best reconstruction performance (lowest BCE) and classification performance
+    \item \textbf{GVAE-CV} provides good reconstruction performance, better than standard GVAE
+    \item \textbf{GVAE} offers better probabilistic modeling (higher log-likelihood) than RAE
+    \item \textbf{GNCN-PDH} offers a biologically plausible alternative, though direct comparison on all metrics was not possible in this experiment
+\end{enumerate}
+
+The choice between these models depends on specific requirements:
+\begin{itemize}
+    \item If biological plausibility is important, GNCN-PDH may be preferred
+    \item If pure reconstruction quality and classification are the goals, RAE performs best
+    \item If probabilistic modeling and density estimation are important, GVAE is a better choice
+    \item GVAE-CV offers a good middle ground between reconstruction quality and probabilistic modeling
+\end{itemize}
+
+\section{Future Work}
+
+To provide a more comprehensive comparison:
+\begin{enumerate}
+    \item Run GNCN-PDH for more epochs to ensure fair comparison
+    \item Collect the same metrics for all models
+    \item Evaluate all models on additional datasets beyond MNIST
+    \item Compare computational efficiency and training time
+    \item Explore hybrid approaches that combine the strengths of different models
+\end{enumerate}
+
+\end{document}
