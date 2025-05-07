@@ -1,0 +1,309 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{geometry}
+
+\geometry{margin=1in}
+
+\title{Detailed Explanation of ``Neural Generative Coding Framework for Learning Generative Models'' Supplementary Material}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{NGC Framework and Naming Convention}
+
+The document establishes a clear naming convention for Generative Neural Coding Network (GNCN) models:
+
+\begin{itemize}
+  \item \textbf{Base Name}: GNCN (Generative Neural Coding Network)
+  \item \textbf{Error Synapse Types}:
+  \begin{itemize}
+    \item \textbf{Type 1 (-t1)}: Error synapses that are functions of forward generative weights (virtual synapses)
+    \item \textbf{Type 2 (-t2)}: Separate learnable synaptic parameters dedicated to transmitting error messages
+  \end{itemize}
+
+  \item \textbf{Additional Suffixes}:
+  \begin{itemize}
+    \item \textbf{-L}: Indicates lateral synapses in state variables
+    \item \textbf{-$\Sigma$}: Indicates lateral precision weights in error neurons
+    \item \textbf{-PDH}: ``Partially decomposable hierarchy'' - used when the model has a non-hierarchical structure in its generative/prediction neural structure ($\alpha_m = 1$)
+    \item \textbf{-PDEH}: ``Partially decomposable error hierarchy'' - used when the model contains a non-hierarchical error structure
+  \end{itemize}
+\end{itemize}
+
+\section{Four Key NGC Models Investigated}
+
+The document details four main GNCN models that were investigated:
+
+\begin{enumerate}
+  \item \textbf{GNCN-t1/Rao}: 
+  \begin{itemize}
+    \item Type 1 error synapses
+    \item No precision weights
+    \item No lateral weights
+    \item $\alpha_m = 0$
+    \item Uses partial derivatives of activation functions
+    \item Recovers the classical predictive coding model of Rao \& Ballard
+  \end{itemize}
+
+  \item \textbf{GNCN-t1-$\Sigma$/Friston}:
+  \begin{itemize}
+    \item Type 1 error synapses
+    \item Has precision weights
+    \item No lateral weights
+    \item $\alpha_m = 0$
+    \item Uses partial derivatives of activation functions
+    \item Recovers Friston's predictive coding model
+  \end{itemize}
+
+  \item \textbf{GNCN-t2-L$\Sigma$}:
+  \begin{itemize}
+    \item Type 2 error synapses (learnable)
+    \item Has precision weights
+    \item Has lateral weights
+    \item $\alpha_m = 0$
+    \item Does not use partial derivatives of activation functions
+    \item Novel model with enhanced biological plausibility
+  \end{itemize}
+
+  \item \textbf{GNCN-t2-L$\Sigma$-PDH} (abbreviated as \textbf{GNCN-PDH}):
+  \begin{itemize}
+    \item Type 2 error synapses
+    \item Has precision weights
+    \item Has lateral weights
+    \item $\alpha_m = 1$ (partially decomposable hierarchy)
+    \item Does not use partial derivatives of activation functions
+    \item Most advanced model with non-hierarchical structure
+  \end{itemize}
+\end{enumerate}
+
+\section{Variant NGC Architectures}
+
+The document describes five variant NGC architectures:
+
+\begin{enumerate}
+  \item \textbf{Multi-input GNCN-t2-$\Sigma$}: Handles multiple clamped inputs to generate/predict outputs (useful for direct classification tasks)
+
+  \item \textbf{Multimodal GNCN-t2-L$\Sigma$}: For multi-modal generative modeling (e.g., jointly learning to synthesize an image and discrete one-hot encoding of a word/character)
+
+  \item \textbf{GNCN-t2-L$\Sigma$-PDEH (GNCN-PDEH)}: A generative model where upper layers receive error messages from layers other than its immediately connected one
+
+  \item \textbf{GNCN-t2-L$\Sigma$-PDH (label aware)}: A label-aware generative model that forms a partially decomposable hierarchy in its forward generative structure
+
+  \item \textbf{GNCN-t2-$\Sigma$-RecN}: A temporal/recurrent NGC model where predictive outputs of each state region are conditioned on their previous values
+\end{enumerate}
+
+\section{Model Hyperparameters and Architecture Details}
+
+The document provides detailed information about model hyperparameters:
+
+\begin{itemize}
+  \item \textbf{Latent Dimensions}: 
+  \begin{itemize}
+    \item For NGC models with lateral synapses: 20 neural columns in topmost layers
+    \item Lower levels: 360 neurons (found optimal through experimentation)
+    \item GNCN-t1 and GNCN-t1-$\Sigma$: 360 neurons in top layer
+  \end{itemize}
+
+  \item \textbf{Activation Functions}:
+  \begin{itemize}
+    \item Linear rectifier (ReLU) for NGC models to ensure positive activity values
+    \item GNCN-t1-$\Sigma$: Linear rectifier worked best
+    \item GNCN-t1: Hyperbolic tangent worked best
+  \end{itemize}
+
+  \item \textbf{Comparison with Autoencoders}:
+  \begin{itemize}
+    \item Autoencoder hidden layer sizes were set to be equal
+    \item Maximum parameter count was constrained to match NGC models (approximately 1,400,000 synapses)
+  \end{itemize}
+\end{itemize}
+
+\section{Computational Complexity and Run-time Considerations}
+
+The document addresses the computational complexity of NGC models:
+
+\begin{itemize}
+  \item \textbf{Inference Cost}:
+  \begin{itemize}
+    \item NGC models require multiple steps of processing ($T$ iterations) for inference
+    \item Autoencoder: $\sim 2L$ matrix multiplications ($L$ = number of layers)
+    \item NGC models: $\sim 2L \times T$ matrix multiplications
+    \item This makes NGC models slower per sample than feedforward autoencoders
+  \end{itemize}
+
+  \item \textbf{Efficiency Considerations}:
+  \begin{itemize}
+    \item NGC models converge with fewer samples than backprop models
+    \item Specialized hardware could exploit NGC's inherent parallelism
+    \item Potential solutions include designing alternative state update equations or amortized inference processes
+  \end{itemize}
+\end{itemize}
+
+\section{Omission of Activation Derivatives}
+
+The document explains why activation derivatives were omitted in GNCN-t2-L$\Sigma$ and GNCN-PDH models:
+
+\begin{itemize}
+  \item \textbf{Stability Considerations}:
+  \begin{itemize}
+    \item No strong weight fluctuations were observed in simulations
+    \item Weight columns are constrained to have unit norms
+    \item Step size $\beta$ is kept within $[0.02, 0.1]$
+    \item Leak variable $-\gamma z_\ell$ helps smooth values and prevent large magnitudes
+  \end{itemize}
+
+  \item \textbf{Theoretical Justification}:
+  \begin{itemize}
+    \item As long as the activation function is monotonically increasing, the learning process remains stable
+    \item The benefit of the point-wise derivative is absorbed by the error synaptic weights
+  \end{itemize}
+\end{itemize}
+
+\section{Lateral Competition Matrices}
+
+The document details how lateral competition matrices are generated:
+
+\begin{itemize}
+  \item \textbf{Matrix Equation}: $V_\ell = \alpha_h(M_\ell) \odot (1-I) - \alpha_e(I)$
+  \begin{itemize}
+    \item $I$ is the identity matrix
+    \item $M_\ell$ is a masking matrix set by the experimenter
+    \item $\alpha_e = 0.13$ (self-excitation strength)
+    \item $\alpha_h = 0.125$ (lateral inhibition strength)
+  \end{itemize}
+
+  \item \textbf{Mask Matrix Generation Process}:
+  \begin{enumerate}
+    \item Create $J_\ell/K$ matrices of shape $J_\ell \times K$ of zeros
+    \item Insert ones at specific coordinates to create the desired inhibition pattern
+    \item Concatenate the matrices along the horizontal axis
+  \end{enumerate}
+
+  \item \textbf{Biological Plausibility}:
+  \begin{itemize}
+    \item While not directly justified in the probabilistic model, experiments show lateral synapses improve performance
+    \item Future work will derive a probabilistic interpretation of these extensions
+  \end{itemize}
+\end{itemize}
+
+\section{Autoencoder Baseline Model Descriptions}
+
+The document provides detailed descriptions of the autoencoder baseline models used for comparison:
+
+\begin{enumerate}
+  \item \textbf{Regularized Auto-encoder (RAE)}:
+  \begin{itemize}
+    \item Standard autoencoder with L2 regularization
+    \item Encoder maps input $x$ to latent representation $z$
+    \item Decoder reconstructs input from $z$
+    \item Uses linear rectifier activations with logistic sigmoid at output layer
+  \end{itemize}
+
+  \item \textbf{Gaussian Variational Auto-encoder (GVAE)}:
+  \begin{itemize}
+    \item Encoder produces parameters of a Gaussian distribution over $z$
+    \item Includes KL divergence term to match prior distribution
+    \item Uses reparameterization trick for sampling
+    \item Objective includes reconstruction term and KL divergence term
+  \end{itemize}
+
+  \item \textbf{Constant-Variance Gaussian Variational Auto-encoder (GVAE-CV)}:
+  \begin{itemize}
+    \item Similar to GVAE but with fixed variance parameter
+    \item Variance meta-parameter chosen from $[0.025, 1.0]$ based on validation performance
+  \end{itemize}
+
+  \item \textbf{Generative Adversarial Network Autoencoder (GAN-AE)}:
+  \begin{itemize}
+    \item Also called adversarial autoencoder
+    \item Similar to GVAE but replaces KL divergence with adversarial objective
+    \item Includes discriminator network to distinguish between prior samples and encoder outputs
+    \item Uses multi-step optimization process
+  \end{itemize}
+\end{enumerate}
+
+\section{Feature Analysis of Neural Generative Coding}
+
+The document describes a feature analysis conducted on the GNCN-t2-L$\Sigma$ model:
+
+\begin{itemize}
+  \item \textbf{Layer 1 to Layer 0 Features}:
+  \begin{itemize}
+    \item Resembled rough strokes and digit components of different orientations/translations
+  \end{itemize}
+
+  \item \textbf{Higher Layer Features}:
+  \begin{itemize}
+    \item Weight vectors in layers 2 and 3 resembled neural selection ``blueprints'' or maps
+    \item These maps appear to select or trigger lower-level state neurons
+  \end{itemize}
+
+  \item \textbf{Multi-level Command Structure}:
+  \begin{itemize}
+    \item NGC models learn a hierarchical command structure
+    \item Neurons in higher levels turn on/off neurons in lower levels
+    \item Intensity coefficients scale the activation of selected neurons
+    \item The final composition of low-level features produces complete objects/digits
+  \end{itemize}
+
+  \item \textbf{Comparison to Sparse Coding}:
+  \begin{itemize}
+    \item NGC learns to compose and produce a weighted summation of low-level features
+    \item Similar to sparse coding but driven by a complex, higher-level neural latent structure
+  \end{itemize}
+\end{itemize}
+
+\section{Experimental Results and Visualizations}
+
+The document includes several supplementary figures showing:
+
+\begin{itemize}
+  \item \textbf{Class Distribution Visualization}: Approximate label distributions produced by each model on MNIST, KMNIST, FMNIST, and CalTech datasets
+  \item \textbf{Nearest Neighbor Analysis}: Comparing samples generated by NGC models with backpropagation-based autoencoder models
+  \item \textbf{Feature Visualization}: Illustrating how higher-level maps interact with low-level visual features
+\end{itemize}
+
+\section{Key Advantages of NGC Models}
+
+From the document, several advantages of NGC models can be identified:
+
+\begin{enumerate}
+  \item \textbf{Biological Plausibility}:
+  \begin{itemize}
+    \item More aligned with neural processing in the brain
+    \item Local learning rules instead of backpropagation
+    \item No need for activation function derivatives in advanced models
+  \end{itemize}
+
+  \item \textbf{Data Efficiency}:
+  \begin{itemize}
+    \item Converge with fewer samples than backprop models
+    \item Better generalization from limited data
+  \end{itemize}
+
+  \item \textbf{Hierarchical Representation}:
+  \begin{itemize}
+    \item Learn meaningful hierarchical features
+    \item Higher layers control and organize lower-level features
+    \item Create compositional representations
+  \end{itemize}
+
+  \item \textbf{Flexibility}:
+  \begin{itemize}
+    \item Can be extended to various architectures (multi-input, multimodal, recurrent)
+    \item Compatible with different distribution assumptions
+    \item Adaptable to different tasks beyond reconstruction
+  \end{itemize}
+\end{enumerate}
+
+\end{document}

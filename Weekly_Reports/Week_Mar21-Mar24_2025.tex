@@ -1,0 +1,361 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+\geometry{margin=1in}
+
+% Format section titles
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{blue}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{blue!80}}
+  {\thesubsection}{1em}{}
+
+% Title information
+\title{\textbf{Weekly Progress Report}\\[0.5em]\Large{March 21 - March 24, 2025}}
+\author{Yonas Desta Ebren}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Overview}
+During this brief period, I was assigned to a new mentor and began work on a new research direction. My primary task was to read and understand the research paper ``Predictive Coding beyond Gaussian Models,'' which explores extending predictive coding frameworks beyond the traditional Gaussian distribution assumptions.
+
+\section{Tasks Completed}
+
+\subsection{Initial Meeting with New Mentor}
+
+\begin{itemize}
+  \item \textbf{Introduction and Background Discussion}:
+  \begin{itemize}
+    \item Met with my new mentor, Dr. Sarah Chen
+    \item Discussed my background and previous work on NGC models
+    \item Reviewed my experience with predictive coding frameworks
+    \item Established communication protocols and expectations
+  \end{itemize}
+
+  \item \textbf{Research Direction Overview}:
+  \begin{itemize}
+    \item Received an overview of the research group's current focus
+    \item Discussed the importance of extending predictive coding beyond Gaussian assumptions
+    \item Explored potential applications and impact of this research direction
+    \item Identified key challenges and open questions in the field
+  \end{itemize}
+
+  \item \textbf{Task Assignment and Planning}:
+  \begin{itemize}
+    \item Received my first task: to thoroughly understand the paper ``Predictive Coding beyond Gaussian Models''
+    \item Established a timeline for completing the initial reading and analysis
+    \item Planned follow-up discussions to assess understanding
+    \item Set expectations for documentation of insights and questions
+  \end{itemize}
+
+  \item \textbf{Resource Identification}:
+  \begin{itemize}
+    \item Received access to relevant research papers and resources
+    \item Identified key background materials to review
+    \item Discussed available computational resources for future implementation
+    \item Established access to the research group's code repositories
+  \end{itemize}
+\end{itemize}
+
+\subsection{Paper Study: ``Predictive Coding beyond Gaussian Models''}
+
+\begin{itemize}
+  \item \textbf{Initial Reading and Annotation}:
+  \begin{itemize}
+    \item Performed a careful initial reading of the paper
+    \item Annotated key concepts, mathematical formulations, and novel contributions
+    \item Identified sections requiring deeper study or additional background
+    \item Created a glossary of important terms and concepts
+  \end{itemize}
+
+  \item \textbf{Mathematical Framework Analysis}:
+  \begin{itemize}
+    \item Studied the mathematical formulations for non-Gaussian predictive coding
+    \item Analyzed the derivations of update rules for different distributions
+    \item Compared with traditional Gaussian predictive coding mathematics
+    \item Verified mathematical consistency and correctness
+  \end{itemize}
+
+  \item \textbf{Model Architecture Study}:
+  \begin{itemize}
+    \item Examined the architectural modifications required for non-Gaussian distributions
+    \item Analyzed the implementation details for different distribution types:
+    \begin{itemize}
+      \item Student's t-distribution
+      \item Laplace distribution
+      \item Mixture of Gaussians
+      \item Exponential family distributions
+    \end{itemize}
+    \item Identified key components and their interactions
+    \item Created architectural diagrams for visual understanding
+  \end{itemize}
+
+  \item \textbf{Experimental Results Analysis}:
+  \begin{itemize}
+    \item Studied the experimental results presented in the paper
+    \item Analyzed performance comparisons between Gaussian and non-Gaussian models
+    \item Examined the datasets and evaluation metrics used
+    \item Identified strengths and limitations of the approach
+  \end{itemize}
+\end{itemize}
+
+\subsection{Background Knowledge Enhancement}
+
+\begin{itemize}
+  \item \textbf{Distribution Theory Review}:
+  \begin{itemize}
+    \item Reviewed statistical theory of different probability distributions
+    \item Studied properties of heavy-tailed distributions
+    \item Examined maximum likelihood estimation for various distributions
+    \item Explored Bayesian inference with non-Gaussian priors
+  \end{itemize}
+
+  \item \textbf{Predictive Coding Foundations Review}:
+  \begin{itemize}
+    \item Revisited fundamental papers on predictive coding
+    \item Studied the theoretical justifications for Gaussian assumptions
+    \item Examined biological evidence for non-Gaussian processing in the brain
+    \item Analyzed the limitations of Gaussian assumptions in neural modeling
+  \end{itemize}
+
+  \item \textbf{Implementation Considerations Study}:
+  \begin{itemize}
+    \item Researched numerical stability issues with different distributions
+    \item Studied efficient implementations of operations for various distributions
+    \item Examined optimization challenges specific to non-Gaussian models
+    \item Identified potential computational bottlenecks
+  \end{itemize}
+
+  \item \textbf{Related Work Exploration}:
+  \begin{itemize}
+    \item Identified and reviewed related papers on non-Gaussian neural models
+    \item Studied connections to robust statistics and outlier handling
+    \item Explored applications where non-Gaussian assumptions are particularly beneficial
+    \item Examined alternative approaches to handling non-Gaussian data
+  \end{itemize}
+\end{itemize}
+
+\subsection{Documentation and Question Formulation}
+
+\begin{itemize}
+  \item \textbf{Comprehensive Notes Creation}:
+  \begin{itemize}
+    \item Created detailed notes on the paper's key contributions
+    \item Documented mathematical formulations with explanations
+    \item Organized insights by topic for easy reference
+    \item Included personal observations and interpretations
+  \end{itemize}
+
+  \item \textbf{Question Formulation}:
+  \begin{itemize}
+    \item Developed a list of clarifying questions about the paper
+    \item Identified aspects requiring further explanation
+    \item Formulated questions about implementation details
+    \item Prepared discussion points for the next mentor meeting
+  \end{itemize}
+
+  \item \textbf{Visual Aid Development}:
+  \begin{itemize}
+    \item Created diagrams illustrating key concepts
+    \item Developed visual comparisons between Gaussian and non-Gaussian approaches
+    \item Produced graphical representations of different distributions
+    \item Designed flowcharts for algorithmic procedures
+  \end{itemize}
+
+  \item \textbf{Implementation Planning}:
+  \begin{itemize}
+    \item Began preliminary planning for future implementation
+    \item Identified key components that would need to be developed
+    \item Noted potential challenges and approaches to address them
+    \item Created a draft implementation roadmap
+  \end{itemize}
+\end{itemize}
+
+\section{Mathematical Developments}
+
+\subsection{Gaussian vs. Non-Gaussian Predictive Coding}
+
+In traditional Gaussian predictive coding, the generative model assumes that each layer generates its lower layer through a Gaussian distribution:
+
+\begin{equation}
+  P(z_{\ell-1}|z_\ell) = \mathcal{N}(z_{\ell-1}; g_\ell(W_\ell \cdot \Phi_\ell(z_\ell)), \Sigma_{\ell-1})
+\end{equation}
+
+Where:
+\begin{itemize}
+  \item $z_\ell$ is the state vector at layer $\ell$
+  \item $g_\ell$ is an activation function
+  \item $W_\ell$ is the generative weight matrix
+  \item $\Phi_\ell$ is a nonlinear transformation
+  \item $\Sigma_{\ell-1}$ is the covariance matrix
+\end{itemize}
+
+The corresponding error computation is:
+
+\begin{equation}
+  e_\ell = (\Sigma_\ell)^{-1} \odot (z_{\ell-1} - \hat{z}_{\ell-1})
+\end{equation}
+
+Where $\hat{z}_{\ell-1} = g_\ell(W_\ell \cdot \Phi_\ell(z_\ell))$ is the prediction of layer $\ell-1$ from layer $\ell$.
+
+\subsection{Student's t-Distribution Extension}
+
+The paper extends this to Student's t-distribution:
+
+\begin{equation}
+  P(z_{\ell-1}|z_\ell) = \text{St}(z_{\ell-1}; g_\ell(W_\ell \cdot \Phi_\ell(z_\ell)), \Sigma_{\ell-1}, \nu)
+\end{equation}
+
+Where $\nu$ is the degrees of freedom parameter.
+
+The error computation becomes:
+
+\begin{equation}
+  e_\ell = \frac{(\nu + d_\ell)}{(\nu + \delta_\ell^2)} \cdot (\Sigma_\ell)^{-1} \odot (z_{\ell-1} - \hat{z}_{\ell-1})
+\end{equation}
+
+Where:
+\begin{itemize}
+  \item $d_\ell$ is the dimensionality of layer $\ell$
+  \item $\delta_\ell^2 = (z_{\ell-1} - \hat{z}_{\ell-1})^T \cdot (\Sigma_\ell)^{-1} \cdot (z_{\ell-1} - \hat{z}_{\ell-1})$
+\end{itemize}
+
+\subsection{Laplace Distribution Extension}
+
+For the Laplace distribution:
+
+\begin{equation}
+  P(z_{\ell-1}|z_\ell) = \text{Laplace}(z_{\ell-1}; g_\ell(W_\ell \cdot \Phi_\ell(z_\ell)), b_\ell)
+\end{equation}
+
+Where $b_\ell$ is the scale parameter.
+
+The error computation becomes:
+
+\begin{equation}
+  e_\ell = \frac{1}{b_\ell} \cdot \text{sign}(z_{\ell-1} - \hat{z}_{\ell-1})
+\end{equation}
+
+\subsection{Mixture of Gaussians Extension}
+
+For a mixture of Gaussians:
+
+\begin{equation}
+  P(z_{\ell-1}|z_\ell) = \sum_{k=1}^K \pi_k \cdot \mathcal{N}(z_{\ell-1}; \mu_k, \Sigma_k)
+\end{equation}
+
+Where:
+\begin{itemize}
+  \item $\pi_k$ are the mixture weights
+  \item $\mu_k = g_\ell(W_{\ell,k} \cdot \Phi_\ell(z_\ell))$
+  \item $\Sigma_k$ are component-specific covariance matrices
+\end{itemize}
+
+The error computation involves responsibility-weighted errors:
+
+\begin{equation}
+  e_\ell = \sum_{k=1}^K r_k \cdot (\Sigma_k)^{-1} \odot (z_{\ell-1} - \mu_k)
+\end{equation}
+
+Where $r_k$ are the responsibilities:
+
+\begin{equation}
+  r_k = \frac{\pi_k \cdot \mathcal{N}(z_{\ell-1}; \mu_k, \Sigma_k)}{\sum_{j=1}^K \pi_j \cdot \mathcal{N}(z_{\ell-1}; \mu_j, \Sigma_j)}
+\end{equation}
+
+\section{Key Insights}
+
+\begin{enumerate}
+  \item \textbf{Distribution Impact}:
+  \begin{itemize}
+    \item Non-Gaussian distributions can significantly impact model robustness
+    \item Heavy-tailed distributions (e.g., Student's t) provide better handling of outliers
+    \item Different distributions create different inductive biases in the model
+    \item The choice of distribution should be informed by data characteristics
+  \end{itemize}
+
+  \item \textbf{Mathematical Extensions}:
+  \begin{itemize}
+    \item The predictive coding framework can be naturally extended to non-Gaussian distributions
+    \item Update rules require modification based on the specific distribution
+    \item The core principles of prediction error minimization remain consistent
+    \item Computational complexity increases with more complex distributions
+  \end{itemize}
+
+  \item \textbf{Practical Advantages}:
+  \begin{itemize}
+    \item Non-Gaussian models show improved robustness to outliers and noise
+    \item They can better capture multi-modal data distributions
+    \item Performance improvements are most significant on datasets with non-Gaussian characteristics
+    \item The advantages come with increased computational requirements
+  \end{itemize}
+
+  \item \textbf{Implementation Considerations}:
+  \begin{itemize}
+    \item Numerical stability is a key concern for some distributions
+    \item Efficient implementation requires careful consideration of distribution-specific operations
+    \item Hyperparameter sensitivity may increase with non-Gaussian models
+    \item Testing and validation procedures need to be adapted
+  \end{itemize}
+\end{enumerate}
+
+\section{Challenges Encountered}
+
+\begin{enumerate}
+  \item \textbf{Mathematical Complexity}:
+  \begin{itemize}
+    \item Some derivations for non-Gaussian update rules were mathematically complex
+    \item Required reviewing advanced statistical concepts
+    \item Created supplementary study materials to address these challenges
+  \end{itemize}
+
+  \item \textbf{Conceptual Integration}:
+  \begin{itemize}
+    \item Integrating non-Gaussian concepts with existing predictive coding knowledge
+    \item Understanding the implications of distribution changes on the overall framework
+    \item Addressed through systematic comparison and mapping of concepts
+  \end{itemize}
+
+  \item \textbf{Implementation Visualization}:
+  \begin{itemize}
+    \item Difficulty visualizing how theoretical changes would manifest in code
+    \item Limited implementation details in the paper
+    \item Began sketching pseudocode to bridge this gap
+  \end{itemize}
+\end{enumerate}
+
+\section{Next Steps}
+
+\begin{enumerate}
+  \item Discuss questions and insights with mentor
+  \item Begin exploring the codebase for the implementation of these models
+  \item Identify specific datasets that would benefit from non-Gaussian approaches
+  \item Prepare for implementation of key components
+  \item Develop a plan for experimental validation
+\end{enumerate}
+
+\section{Resources Used}
+
+\begin{itemize}
+  \item Research paper: ``Predictive Coding beyond Gaussian Models''
+  \item Reference materials on statistical distributions
+  \item Foundational papers on predictive coding
+  \item Online resources for mathematical concepts
+  \item Visualization tools for creating diagrams
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,468 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+\geometry{margin=1in}
+
+% Format section titles
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{blue}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{blue!80}}
+  {\thesubsection}{1em}{}
+
+% Title information
+\title{\textbf{Weekly Progress Report}\\[0.5em]\Large{April 24 - April 30, 2025}}
+\author{Yonas Desta Ebren}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Overview}
+This week, I focused on implementing Predictive Coding (PC) layers in transformer architecture. This involved developing mathematical formulations, creating code implementations, and conducting initial experiments to validate the approach. The work builds directly on my previous analysis of NanoGPT and transformer architectures.
+
+\section{Tasks Completed}
+
+\subsection{Mathematical Framework Development}
+
+\begin{itemize}
+  \item \textbf{Predictive Coding Transformer Formulation}:
+  \begin{itemize}
+    \item Developed a comprehensive mathematical framework for PC-based transformers:
+    \begin{itemize}
+      \item Reformulated attention as precision-weighted prediction error minimization
+      \item Derived update rules for transformer parameters based on prediction errors
+      \item Created mathematical models for hierarchical prediction across transformer layers
+      \item Formulated precision (uncertainty) estimation within the attention mechanism
+    \end{itemize}
+    \item Verified mathematical consistency and correctness
+    \item Created detailed documentation of mathematical derivations
+    \item Developed notation and conventions for the integrated framework
+  \end{itemize}
+
+  \item \textbf{Non-Gaussian Attention Mechanism}:
+  \begin{itemize}
+    \item Extended the mathematical framework to incorporate non-Gaussian distributions:
+    \begin{itemize}
+      \item Derived attention computations for Student's t-distribution
+      \item Formulated Laplace distribution-based attention
+      \item Developed mixture model approaches for multi-modal attention
+      \item Created mathematical models for distribution parameter learning
+    \end{itemize}
+    \item Analyzed theoretical properties of non-Gaussian attention
+    \item Derived computational complexity estimates
+    \item Documented mathematical formulations with examples
+  \end{itemize}
+
+  \item \textbf{Error Propagation Formulation}:
+  \begin{itemize}
+    \item Developed mathematical models for error propagation in PC transformers:
+    \begin{itemize}
+      \item Formulated layer-wise error computation and propagation
+      \item Derived update rules based on prediction errors
+      \item Created mathematical models for error-based parameter adjustment
+      \item Formulated precision-weighting of errors across attention heads
+    \end{itemize}
+    \item Analyzed convergence properties of the error propagation approach
+    \item Derived stability conditions for the update rules
+    \item Documented the error propagation framework
+  \end{itemize}
+
+  \item \textbf{Inference Process Formulation}:
+  \begin{itemize}
+    \item Developed mathematical models for the inference process:
+    \begin{itemize}
+      \item Formulated iterative settling for token prediction
+      \item Derived sampling strategies based on predictive distributions
+      \item Created mathematical models for uncertainty estimation during inference
+      \item Formulated KV-cache adaptation for PC-based inference
+    \end{itemize}
+    \item Analyzed computational requirements for inference
+    \item Derived approximations for efficient implementation
+    \item Documented the inference process formulation
+  \end{itemize}
+\end{itemize}
+
+\subsection{Implementation of PC Layers}
+
+\begin{itemize}
+  \item \textbf{Core PC Transformer Block Implementation}:
+  \begin{itemize}
+    \item Implemented the core PC transformer block:
+    \begin{itemize}
+      \item Created PC-based multi-head attention implementation
+      \item Developed error computation and propagation mechanisms
+      \item Implemented precision-weighted feed-forward networks
+      \item Created layer normalization adapted for PC framework
+    \end{itemize}
+    \item Ensured compatibility with PyTorch ecosystem
+    \item Implemented efficient tensor operations
+    \item Added comprehensive documentation and type hints
+  \end{itemize}
+
+  \item \textbf{Attention Mechanism Implementation}:
+  \begin{itemize}
+    \item Implemented PC-based attention mechanisms:
+    \begin{itemize}
+      \item Created precision-weighted attention computation
+      \item Developed error-driven attention update rules
+      \item Implemented non-Gaussian attention variants
+      \item Created attention visualization tools
+    \end{itemize}
+    \item Optimized implementation for computational efficiency
+    \item Added support for attention masking and causal attention
+    \item Implemented KV-caching compatible with PC framework
+  \end{itemize}
+
+  \item \textbf{Error Computation and Propagation Implementation}:
+  \begin{itemize}
+    \item Implemented error computation and propagation:
+    \begin{itemize}
+      \item Created layer-wise error computation modules
+      \item Developed bidirectional error propagation mechanisms
+      \item Implemented precision parameter optimization
+      \item Created monitoring tools for error dynamics
+    \end{itemize}
+    \item Ensured numerical stability through careful implementation
+    \item Optimized memory usage for error representations
+    \item Added debugging tools for error visualization
+  \end{itemize}
+
+  \item \textbf{Integration with Transformer Architecture}:
+  \begin{itemize}
+    \item Integrated PC components with transformer architecture:
+    \begin{itemize}
+      \item Created adapter modules for embedding integration
+      \item Developed PC-compatible position encoding
+      \item Implemented PC-based output layer
+      \item Created integration points with standard transformer components
+    \end{itemize}
+    \item Ensured backward compatibility where appropriate
+    \item Implemented configuration system for flexible architecture definition
+    \item Added comprehensive testing for integrated components
+  \end{itemize}
+\end{itemize}
+
+\subsection{Experimental Validation}
+
+\begin{itemize}
+  \item \textbf{Toy Problem Experiments}:
+  \begin{itemize}
+    \item Conducted experiments on synthetic toy problems:
+    \begin{itemize}
+      \item Sequence copying task
+      \item Next token prediction with artificial patterns
+      \item Sequence classification with controlled complexity
+      \item Attention pattern learning on structured data
+    \end{itemize}
+    \item Analyzed convergence behavior and stability
+    \item Compared with standard transformer implementations
+    \item Documented experimental results and insights
+  \end{itemize}
+
+  \item \textbf{Component-Level Testing}:
+  \begin{itemize}
+    \item Performed detailed testing of individual components:
+    \begin{itemize}
+      \item Attention mechanism correctness and efficiency
+      \item Error propagation dynamics and stability
+      \item Non-Gaussian distribution implementations
+      \item Integration with standard transformer components
+    \end{itemize}
+    \item Created visualization tools for component behavior
+    \item Developed quantitative evaluation metrics
+    \item Documented component performance characteristics
+  \end{itemize}
+
+  \item \textbf{Small-Scale Language Modeling}:
+  \begin{itemize}
+    \item Conducted initial experiments on small-scale language modeling:
+    \begin{itemize}
+      \item Character-level language modeling on tiny Shakespeare
+      \item Word-level language modeling on WikiText-2 subset
+      \item Sentiment classification on SST-2 subset
+      \item Part-of-speech tagging on Penn Treebank subset
+    \end{itemize}
+    \item Analyzed performance compared to standard transformers
+    \item Examined convergence behavior and training dynamics
+    \item Documented preliminary results and observations
+  \end{itemize}
+
+  \item \textbf{Ablation Studies}:
+  \begin{itemize}
+    \item Performed ablation studies to understand component contributions:
+    \begin{itemize}
+      \item Removed precision-weighting from attention
+      \item Replaced non-Gaussian distributions with Gaussian
+      \item Modified error propagation pathways
+      \item Varied iteration counts for settling dynamics
+    \end{itemize}
+    \item Analyzed the impact of each component
+    \item Identified critical components for performance
+    \item Documented ablation study results
+  \end{itemize}
+\end{itemize}
+
+\subsection{Analysis and Optimization}
+
+\begin{itemize}
+  \item \textbf{Performance Analysis}:
+  \begin{itemize}
+    \item Conducted detailed performance analysis:
+    \begin{itemize}
+      \item Training convergence rate and stability
+      \item Inference quality and efficiency
+      \item Memory requirements and scaling behavior
+      \item Computational overhead compared to standard transformers
+    \end{itemize}
+    \item Created performance profiles for different configurations
+    \item Identified performance bottlenecks
+    \item Documented performance characteristics
+  \end{itemize}
+
+  \item \textbf{Computational Optimization}:
+  \begin{itemize}
+    \item Implemented optimizations for computational efficiency:
+    \begin{itemize}
+      \item Fused operations for attention computation
+      \item Memory-efficient error representation
+      \item Optimized iteration scheduling for settling dynamics
+      \item Efficient implementation of non-Gaussian operations
+    \end{itemize}
+    \item Measured impact of optimizations on performance
+    \item Analyzed trade-offs between accuracy and efficiency
+    \item Documented optimization approaches and results
+  \end{itemize}
+
+  \item \textbf{Hyperparameter Sensitivity Analysis}:
+  \begin{itemize}
+    \item Analyzed sensitivity to key hyperparameters:
+    \begin{itemize}
+      \item Learning rates for different component types
+      \item Precision initialization and learning rates
+      \item Distribution parameters for non-Gaussian variants
+      \item Iteration counts for settling dynamics
+    \end{itemize}
+    \item Identified robust hyperparameter ranges
+    \item Developed guidelines for hyperparameter selection
+    \item Documented hyperparameter sensitivity patterns
+  \end{itemize}
+
+  \item \textbf{Scaling Analysis}:
+  \begin{itemize}
+    \item Investigated scaling behavior of the implementation:
+    \begin{itemize}
+      \item Model size scaling (layers, dimensions, heads)
+      \item Sequence length scaling
+      \item Batch size scaling
+      \item Dataset size scaling
+    \end{itemize}
+    \item Analyzed computational requirements with scale
+    \item Identified scaling limitations and bottlenecks
+    \item Documented scaling characteristics and recommendations
+  \end{itemize}
+\end{itemize}
+
+\section{Mathematical Developments}
+
+\subsection{Predictive Coding Attention Mechanism}
+
+The standard transformer attention mechanism is defined as:
+
+\begin{equation}
+  \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+\end{equation}
+
+In our PC-based reformulation, we redefine attention as a precision-weighted prediction error minimization process:
+
+\begin{equation}
+  e_{\text{attn}} = z - \hat{z} = z - \sum_{j} a_j v_j
+\end{equation}
+
+Where:
+\begin{itemize}
+  \item $z$ is the target representation
+  \item $\hat{z}$ is the predicted representation
+  \item $a_j$ are attention weights
+  \item $v_j$ are value vectors
+\end{itemize}
+
+The attention weights are computed through an iterative process:
+
+\begin{equation}
+  a_j^{t+1} = a_j^t + \beta \left( (e_{\text{attn}}^t)^T \cdot v_j \cdot \Pi_j - \lambda a_j^t \right)
+\end{equation}
+
+Where:
+\begin{itemize}
+  \item $\beta$ is the learning rate
+  \item $\Pi_j$ is the precision (inverse variance) associated with value $v_j$
+  \item $\lambda$ is a regularization parameter
+\end{itemize}
+
+\subsection{Non-Gaussian Attention Distributions}
+
+For Student's t-distribution based attention, we modify the error computation:
+
+\begin{equation}
+  e_{\text{attn}}^{\text{t-dist}} = \frac{\nu + d}{\nu + \delta^2} \cdot \Pi \odot (z - \hat{z})
+\end{equation}
+
+Where:
+\begin{itemize}
+  \item $\nu$ is the degrees of freedom parameter
+  \item $d$ is the dimensionality of the representation
+  \item $\delta^2 = (z - \hat{z})^T \cdot \Pi \cdot (z - \hat{z})$
+  \item $\Pi$ is the precision matrix
+  \item $\odot$ is element-wise multiplication
+\end{itemize}
+
+For Laplace distribution-based attention:
+
+\begin{equation}
+  e_{\text{attn}}^{\text{Laplace}} = \frac{1}{b} \cdot \text{sign}(z - \hat{z})
+\end{equation}
+
+Where $b$ is the scale parameter of the Laplace distribution.
+
+\subsection{Error Propagation in PC Transformers}
+
+The error propagation through layers follows:
+
+\begin{equation}
+  e_\ell = z_\ell - \hat{z}_\ell = z_\ell - g_\ell(W_\ell \cdot \Phi_\ell(z_{\ell+1}))
+\end{equation}
+
+The state update rule for layer $\ell$ is:
+
+\begin{equation}
+  z_\ell^{t+1} = z_\ell^t + \beta \left( -\gamma z_\ell^t + (E_\ell \cdot e_{\ell-1}^t) - e_\ell^t - V_\ell \cdot \Phi_\ell(z_\ell^t) \right)
+\end{equation}
+
+Where:
+\begin{itemize}
+  \item $\gamma$ is the leak/decay parameter
+  \item $E_\ell$ is the error synaptic matrix
+  \item $V_\ell$ is the lateral connectivity matrix
+\end{itemize}
+
+\subsection{Iterative Inference Process}
+
+The inference process involves iteratively updating the state variables:
+
+\begin{enumerate}
+  \item Initialize token embeddings and positional encodings
+  \item For $t = 1$ to $T$:
+  \begin{itemize}
+    \item Compute predictions across all layers
+    \item Compute errors at each layer
+    \item Update states using the update rules
+    \item Update precision parameters
+  \end{itemize}
+  \item Generate output token probabilities from the final state
+\end{enumerate}
+
+The mathematical formulation for token probability generation:
+
+\begin{equation}
+  p(x_i | x_{<i}) = \text{softmax}(W_o \cdot z_0^T)
+\end{equation}
+
+Where $W_o$ is the output projection matrix and $z_0^T$ is the final state of the output layer after $T$ iterations.
+
+\section{Key Insights}
+
+\begin{enumerate}
+  \item \textbf{Attention as Predictive Coding}:
+  \begin{itemize}
+    \item Attention mechanisms can be naturally reformulated as precision-weighted prediction error minimization
+    \item This reformulation provides a principled approach to uncertainty handling in attention
+    \item The PC formulation offers theoretical advantages in terms of robustness and interpretability
+    \item Implementation requires careful consideration of computational efficiency
+  \end{itemize}
+
+  \item \textbf{Non-Gaussian Benefits}:
+  \begin{itemize}
+    \item Non-Gaussian attention distributions show improved robustness to outliers in the data
+    \item Student's t-distribution provides better handling of heavy-tailed attention patterns
+    \item Mixture models can effectively capture multi-modal attention distributions
+    \item The benefits come with increased computational complexity
+  \end{itemize}
+
+  \item \textbf{Error Propagation Dynamics}:
+  \begin{itemize}
+    \item Bidirectional error propagation creates rich learning dynamics
+    \item The settling process allows for iterative refinement of representations
+    \item Convergence behavior depends critically on precision parameter initialization
+    \item The approach shows interesting emergent properties not present in standard transformers
+  \end{itemize}
+
+  \item \textbf{Implementation Considerations}:
+  \begin{itemize}
+    \item The PC framework introduces computational overhead compared to standard transformers
+    \item Memory requirements are higher due to error representation storage
+    \item Careful optimization can mitigate much of the computational overhead
+    \item The approach scales reasonably well with model size and sequence length
+  \end{itemize}
+\end{enumerate}
+
+\section{Challenges Encountered}
+
+\begin{enumerate}
+  \item \textbf{Computational Efficiency}:
+  \begin{itemize}
+    \item The iterative settling process introduces significant computational overhead
+    \item Implemented efficient scheduling and early stopping to mitigate this issue
+    \item Developed approximations that preserve key benefits while reducing computation
+  \end{itemize}
+
+  \item \textbf{Numerical Stability}:
+  \begin{itemize}
+    \item Non-Gaussian operations occasionally exhibited numerical instability
+    \item Implemented careful normalization and clipping to ensure stability
+    \item Developed robust initialization strategies for distribution parameters
+  \end{itemize}
+
+  \item \textbf{Integration Complexity}:
+  \begin{itemize}
+    \item Integrating PC principles with transformer architecture required careful design
+    \item Some transformer operations had no direct PC analog
+    \item Developed hybrid approaches to address integration challenges
+  \end{itemize}
+\end{enumerate}
+
+\section{Next Steps}
+
+\begin{enumerate}
+  \item Extend experiments to larger language modeling tasks
+  \item Implement additional non-Gaussian distribution variants
+  \item Develop more sophisticated optimization strategies for computational efficiency
+  \item Create comprehensive evaluation benchmarks for PC transformers
+  \item Prepare a technical paper on the PC transformer implementation
+  \item Explore applications to other transformer-based tasks
+\end{enumerate}
+
+\section{Resources Used}
+
+\begin{itemize}
+  \item PyTorch for implementation
+  \item NanoGPT codebase as reference
+  \item Predictive coding framework
+  \item Transformer implementation references
+  \item GPU computing resources for experimentation
+  \item Visualization tools for analysis
+\end{itemize}
+
+\end{document}
